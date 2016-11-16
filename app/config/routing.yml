@@ -1,3 +1,7 @@
+user_interface:
+    resource: "@UserInterfaceBundle/Resources/config/routing.yml"
+    prefix:   /
+
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation

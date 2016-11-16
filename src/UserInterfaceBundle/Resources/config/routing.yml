@@ -1,0 +1,3 @@
+user_interface_homepage:
+    path:     /
+    defaults: { _controller: UserInterfaceBundle:Default:index }
