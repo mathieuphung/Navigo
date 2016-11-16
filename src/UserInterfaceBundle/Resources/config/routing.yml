@@ -1,3 +1,7 @@
 user_interface_homepage:
     path:     /
     defaults: { _controller: UserInterfaceBundle:Default:index }
+
+signup:
+    path:     /signup
+    defaults: { _controller: UserInterfaceBundle:Signup:signup }

@@ -1,0 +1,18 @@
+{% extends "UserInterfaceBundle:Default:navbar.html.twig" %}
+
+{% block title %}UserInterfaceBundle:Signup:signup{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Inscription</h1>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $( document ).ready(function() {
+            $(".nav").find(".active").removeClass("active");
+            $("#signup").addClass("active");
+        });
+    </script>
+{% endblock %}
