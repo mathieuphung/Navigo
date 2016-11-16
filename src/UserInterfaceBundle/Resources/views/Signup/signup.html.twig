@@ -1,10 +1,12 @@
 {% extends "UserInterfaceBundle:Default:navbar.html.twig" %}
 
-{% block title %}UserInterfaceBundle:Signup:signup{% endblock %}
+{% block title %}Inscription{% endblock %}
 
 {% block body %}
     <div class="container">
         <h1>Inscription</h1>
+
+        {{ form(form) }}
     </div>
 {% endblock %}
 {% block javascripts %}

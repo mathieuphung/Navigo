@@ -1,6 +1,6 @@
 {% extends "UserInterfaceBundle:Default:navbar.html.twig" %}
 {% block body %}
     <div class="container">
-        <h1>Hello!</h1>
+        <h1>Hello {% if name is defined %} {{ name }} {% endif %} !</h1>
     </div>
 {% endblock %}
