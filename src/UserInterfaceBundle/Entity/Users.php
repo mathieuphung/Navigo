@@ -3,6 +3,7 @@
 namespace UserInterfaceBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Users
@@ -184,5 +185,39 @@ class Users
     public function getCards()
     {
         return $this->cards;
+    }
+    
+    ///////// UPLOAD PHOTO
+    
+    private $file;
+    
+    public function getFile()
+    {
+        return $this->file;
+    }
+    
+    public function setFile(UploadedFile $file = null)
+    {
+        $this->file = $file;
+    }
+    
+    public function upload(UploadedFile $file = null)
+    {
+        if (null === $file) {
+            return;
+        }
+        $name = $file->getClientOriginalName();
+        $this->setPhoto($name);
+        $file->move($this->getUploadRootDir(), $name);
+    }
+    
+    public function getUploadDir()
+    {
+        return 'uploads/photos';
+    }
+    
+    protected function getUploadRootDir()
+    {
+        return __DIR__.'/../../../web/'.$this->getUploadDir();
     }
 }
