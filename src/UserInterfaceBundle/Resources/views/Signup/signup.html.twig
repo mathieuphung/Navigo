@@ -5,7 +5,7 @@
 {% block body %}
     <div class="container">
         <h1>Inscription</h1>
-        {% if message is defined %}<p>{{ message }}</p>{% endif %}
+        {% if message is defined %}<p>{{ message|raw }}</p>{% endif %}
         {{ form(form) }}
     </div>
 {% endblock %}

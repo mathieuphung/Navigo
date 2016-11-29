@@ -4,6 +4,7 @@ namespace UserInterfaceBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Users
@@ -11,14 +12,14 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  * @ORM\Table(name="users", indexes={@ORM\Index(name="fk_users_cards_idx", columns={"cards_id"})})
  * @ORM\Entity
  */
-class Users
+class Users implements UserInterface
 {
     /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=150, nullable=false)
      */
-    private $name;
+    private $username;
 
     /**
      * @var string
@@ -33,13 +34,20 @@ class Users
      * @ORM\Column(name="photo", type="string", length=45, nullable=true)
      */
     private $photo;
-
+    
     /**
      * @var string
      *
      * @ORM\Column(name="salt", type="string", length=20, nullable=true)
      */
     private $salt;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=20, nullable=true)
+     */
+    private $email;
 
     /**
      * @var integer
@@ -53,36 +61,68 @@ class Users
     /**
      * @var \UserInterfaceBundle\Entity\Cards
      *
-     * @ORM\ManyToOne(targetEntity="UserInterfaceBundle\Entity\Cards")
+     * @ORM\OneToOne(targetEntity="UserInterfaceBundle\Entity\Cards", cascade={"persist"})
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="cards_id", referencedColumnName="id")
      * })
      */
     private $cards;
-
-
-
+    
     /**
-     * Set name
+     * @ORM\Column(name="roles", type="string")
+     */
+    private $roles;
+    
+    public function eraseCredentials()
+    {
+    }
+    
+    
+    
+    /**
+     * Set username
      *
      * @param string $name
      * @return Users
      */
-    public function setName($name)
+    public function setUsername($username)
     {
-        $this->name = $name;
-
+        $this->username = $username;
+        
         return $this;
     }
-
+    
     /**
-     * Get name
+     * Get username
      *
-     * @return string 
+     * @return string
      */
-    public function getName()
+    public function getUsername()
     {
-        return $this->name;
+        return $this->username;
+    }
+    
+    /**
+     * Set role
+     *
+     * @param string $role
+     * @return Users
+     */
+    public function setRoles($role)
+    {
+        $this->role = $role;
+        
+        return $this;
+    }
+    
+    /**
+     * Get role
+     *
+     * @return string
+     */
+    public function getRoles()
+    {
+        return ['ROLE_'.strtoupper($this->roles)];
     }
 
     /**
@@ -130,7 +170,7 @@ class Users
     {
         return $this->photo;
     }
-
+    
     /**
      * Set salt
      *
@@ -140,18 +180,41 @@ class Users
     public function setSalt($salt)
     {
         $this->salt = $salt;
-
+        
         return $this;
     }
-
+    
     /**
      * Get salt
      *
-     * @return string 
+     * @return string
      */
     public function getSalt()
     {
         return $this->salt;
+    }
+    
+    /**
+     * Set email
+     *
+     * @param string $email
+     * @return Users
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+        
+        return $this;
+    }
+    
+    /**
+     * Get email
+     *
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
     }
 
     /**
@@ -170,7 +233,7 @@ class Users
      * @param \UserInterfaceBundle\Entity\Cards $cards
      * @return Users
      */
-    public function setCards(\UserInterfaceBundle\Entity\Cards $cards = null)
+    public function setCard(\UserInterfaceBundle\Entity\Cards $cards = null)
     {
         $this->cards = $cards;
 
@@ -182,7 +245,7 @@ class Users
      *
      * @return \UserInterfaceBundle\Entity\Cards 
      */
-    public function getCards()
+    public function getCard()
     {
         return $this->cards;
     }

@@ -6,10 +6,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class DefaultController extends Controller
 {
-    public function indexAction($name)
+    public function indexAction()
     {
-        if($name) return $this->render('UserInterfaceBundle:Default:index.html.twig', array('name' => $name));
+        $user = $this->getUser();
     
-        return $this->render('UserInterfaceBundle:Default:index.html.twig');
+        if (null === $user) {
+            return $this->render('UserInterfaceBundle:Default:index.html.twig');
+        } else {
+            return $this->render('UserInterfaceBundle:Default:index.html.twig', array(
+                'name' => explode(' ',$user->getUsername())[1]
+            ));
+        }
     }
 }

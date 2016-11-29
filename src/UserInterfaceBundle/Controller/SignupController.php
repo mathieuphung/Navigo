@@ -14,22 +14,31 @@ class SignupController extends Controller
         $user = new Users();
         $form = $this->createForm(new UsersType(), $user, array("action" => $this->generateUrl('signup')));
         if ($form->handleRequest($request)->isValid()) {
+            $em = $this->getDoctrine()->getManager();
             $formData = $form->getData();
             $user_exist = $this->getDoctrine()->getRepository('UserInterfaceBundle:Users')->findOneByName($formData->getName());
-            if($user_exist) {
-                $salt = uniqid(mt_rand(), true);
-                $user_exist->setSalt($salt);
-                $user_exist->setPassword(sha1($formData->getPassword().$salt));
-                if($formData->getFile()) {
-                    $user_exist->upload($formData->getFile());
+            $card_exist = $this->getDoctrine()->getRepository('UserInterfaceBundle:Cards')->findOneByNumber($formData->getCard()->getNumber());
+            if($card_exist) {
+                if($user_exist) {
+                    $message = 'Vous êtes déjà incrit, <a href="#">connectez-vous</a>.';
+                    return $this->render('UserInterfaceBundle:Signup:signup.html.twig', array(
+                        'form' => $form->createView(),
+                        'message' => $message
+                    ));
+                } else {
+                    $salt = uniqid(mt_rand(), true);
+                    $user->setSalt($salt);
+                    $user->setPassword(sha1($formData->getPassword() . $salt));
+                    $user->getCard()->setValidUntill(new \DateTime());
+                    if ($formData->getFile()) {
+                        $user->upload($formData->getFile());
+                    }
+                    $em->persist($user);
+                    $em->flush();
                 }
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($user_exist);
-                $em->flush();
                 return $this->redirect($this->generateUrl('user_interface_homepage', array('name' => $user->getName())));
-            }
-            else {
-                $message = 'Ce nom n\'est pas enregistré.';
+            } else {
+                $message = 'Ce numéro de carte n\'existe pas.';
                 return $this->render('UserInterfaceBundle:Signup:signup.html.twig', array(
                     'form' => $form->createView(),
                     'message' => $message

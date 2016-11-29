@@ -1,7 +1,17 @@
 user_interface_homepage:
     path:     /
-    defaults: { _controller: UserInterfaceBundle:Default:index }
+    defaults: { _controller: UserInterfaceBundle:Default:index}
 
 signup:
-    path:     /signup
+    path:     /user/signup
     defaults: { _controller: UserInterfaceBundle:Signup:signup }
+
+signin:
+    path:     /user/signin
+    defaults: { _controller: UserInterfaceBundle:Signin:Signin }
+
+login_check:
+    pattern:   /login_check
+
+logout:
+    pattern:   /logout
