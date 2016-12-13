@@ -16,7 +16,7 @@ class SignupController extends Controller
         if ($form->handleRequest($request)->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $formData = $form->getData();
-            $user_exist = $this->getDoctrine()->getRepository('UserInterfaceBundle:Users')->findOneByName($formData->getName());
+            $user_exist = $this->getDoctrine()->getRepository('UserInterfaceBundle:Users')->findOneByEmail($formData->getEmail());
             $card_exist = $this->getDoctrine()->getRepository('UserInterfaceBundle:Cards')->findOneByNumber($formData->getCard()->getNumber());
             if($card_exist) {
                 if($user_exist) {
@@ -25,20 +25,31 @@ class SignupController extends Controller
                         'form' => $form->createView(),
                         'message' => $message
                     ));
+                } else if($this->getDoctrine()->getRepository('UserInterfaceBundle:Users')->findOneByCards($card_exist)) {
+                    $message = 'Ce numéro de carte n\'est pas valide.';
+                    return $this->render('UserInterfaceBundle:Signup:signup.html.twig', array(
+                        'form' => $form->createView(),
+                        'message' => $message
+                    ));
                 } else {
                     $salt = uniqid(mt_rand(), true);
                     $user->setSalt($salt);
-                    $user->setPassword(sha1($formData->getPassword() . $salt));
+                    $factory = $this->get('security.encoder_factory');
+                    $encoder = $factory->getEncoder($user);
+                    $password = $encoder->encodePassword($user->getPassword(), $user->getSalt());
+                    $user->setPassword($password);
+                    $user->setCard($card_exist);
                     $user->getCard()->setValidUntill(new \DateTime());
                     if ($formData->getFile()) {
                         $user->upload($formData->getFile());
                     }
+                    $user->setRoles("traveler");
                     $em->persist($user);
                     $em->flush();
                 }
                 return $this->redirect($this->generateUrl('user_interface_homepage', array('name' => $user->getName())));
             } else {
-                $message = 'Ce numéro de carte n\'existe pas.';
+                $message = 'Ce numéro de carte n\'est pas valide.';
                 return $this->render('UserInterfaceBundle:Signup:signup.html.twig', array(
                     'form' => $form->createView(),
                     'message' => $message

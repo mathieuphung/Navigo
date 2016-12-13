@@ -1,3 +1,33 @@
 .navdiv {
     height: 60px;
 }
+
+#navigo_template {
+    margin: auto;
+    width: 450px;
+    height: 292px;
+    background: url("../uploads/templates/navigo.jpg") no-repeat;
+}
+
+#navigo_template > img {
+    width: 108px;
+    height: 126px;
+    position: relative;
+    right: -284px;
+    top: 66px;
+}
+
+#navigo_template > #name {
+    position: relative;
+    width: 148px;
+    display: inline-block;
+    text-align: center;
+    right: -154px;
+    bottom: -145px;
+}
+
+#navigo_template > #card_number {
+    position: absolute;
+    right: 602px;
+    top: 343px;
+}

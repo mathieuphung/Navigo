@@ -9,12 +9,12 @@ class DefaultController extends Controller
     public function indexAction()
     {
         $user = $this->getUser();
-    
-        if (null === $user) {
+        if ($user === null) {
             return $this->render('UserInterfaceBundle:Default:index.html.twig');
         } else {
             return $this->render('UserInterfaceBundle:Default:index.html.twig', array(
-                'name' => explode(' ',$user->getUsername())[1]
+                'name' => explode(' ',$user->getName())[1],
+                'user' => $user,
             ));
         }
     }

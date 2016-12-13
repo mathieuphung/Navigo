@@ -19,7 +19,7 @@ class Users implements UserInterface
      *
      * @ORM\Column(name="name", type="string", length=150, nullable=false)
      */
-    private $username;
+    private $name;
 
     /**
      * @var string
@@ -45,7 +45,7 @@ class Users implements UserInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=20, nullable=true)
+     * @ORM\Column(name="email", type="string", length=20, nullable=true, unique=true)
      */
     private $email;
 
@@ -63,7 +63,7 @@ class Users implements UserInterface
      *
      * @ORM\OneToOne(targetEntity="UserInterfaceBundle\Entity\Cards", cascade={"persist"})
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="cards_id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="cards_id", referencedColumnName="id", unique=true)
      * })
      */
     private $cards;
@@ -80,26 +80,26 @@ class Users implements UserInterface
     
     
     /**
-     * Set username
+     * Set name
      *
      * @param string $name
      * @return Users
      */
-    public function setUsername($username)
+    public function setName($name)
     {
-        $this->username = $username;
+        $this->name = $name;
         
         return $this;
     }
     
     /**
-     * Get username
+     * Get name
      *
      * @return string
      */
-    public function getUsername()
+    public function getName()
     {
-        return $this->username;
+        return $this->name;
     }
     
     /**
@@ -110,7 +110,7 @@ class Users implements UserInterface
      */
     public function setRoles($role)
     {
-        $this->role = $role;
+        $this->roles = $role;
         
         return $this;
     }
@@ -217,6 +217,9 @@ class Users implements UserInterface
         return $this->email;
     }
 
+    public function getUsername() {
+        return $this->email;
+    }
     /**
      * Get id
      *

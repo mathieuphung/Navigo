@@ -17,9 +17,9 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li id="signup"><a href="{{ path('signup') }}">M'inscrire <span class="sr-only">(current)</span></a></li>
-                    {% if is_granted('ROLE_TRAV') == false %}<li id="login"><a href="{{ path('signin') }}">Me connecter</a></li>{% endif %}
+                    {% if is_granted('ROLE_TRAVELER') == false %}<li id="login"><a href="{{ path('signin') }}">Me connecter</a></li>{% endif %}
                     <li id="check_card"><a href="#">Vérifier ma carte</a></li>
-                    {% if is_granted('ROLE_TRAV') %}<li id="logout"><a href="{{ path('logout') }}">Me déconnecter</a></li>{% endif %}
+                    {% if is_granted('ROLE_TRAVELER') %}<li id="logout"><a href="{{ path('logout') }}">Me déconnecter</a></li>{% endif %}
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->

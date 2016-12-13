@@ -16,8 +16,9 @@ class UsersType extends AbstractType
     {
         $builder
             ->add('name', 'text', array('label' => 'Nom'))
+            ->add('email', 'text', array('label' => 'Email'))
             ->add('card', new CardsType())
-            ->add('password', 'text', array('label' => 'Mot de passe'))
+            ->add('password', 'password', array('label' => 'Mot de passe'))
             ->add('file', 'file', array('label' => 'Photo', 'required' => false))
             ->add('submit', 'submit')
         ;

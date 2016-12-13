@@ -3,4 +3,13 @@
     <div class="container">
         <h1>Hello {% if name is defined %} {{ name }} {% endif %} !</h1>
     </div>
+    {% if user is defined %}
+    <div class="container">
+        <div id="navigo_template">
+            {% if user.photo is defined %}<img src="../uploads/photos/{{ user.photo }}" alt="{{ user.username }}"> {% endif %}
+            <span id="name">{{ user.name }}</span>
+            <span id="card_number">{{ user.card.number }}</span>
+        </div>
+    </div>
+    {% endif %}
 {% endblock %}
