@@ -19,6 +19,7 @@ class UsersType extends AbstractType
             ->add('email', 'text', array('label' => 'Email'))
             ->add('card', new CardsType())
             ->add('password', 'password', array('label' => 'Mot de passe'))
+            ->add('passwordCheck', 'password', array('label' => 'Vérification'))
             ->add('file', 'file', array('label' => 'Photo', 'required' => false))
             ->add('submit', 'submit')
         ;

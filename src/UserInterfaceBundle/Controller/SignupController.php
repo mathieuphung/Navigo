@@ -31,6 +31,12 @@ class SignupController extends Controller
                         'form' => $form->createView(),
                         'message' => $message
                     ));
+                }else if($formData->getPassword() !== $formData->getPasswordCheck()) {
+                    $message = 'Les 2 mots passes ne sont pas identiques.';
+                    return $this->render('UserInterfaceBundle:Signup:signup.html.twig', array(
+                        'form' => $form->createView(),
+                        'message' => $message
+                    ));
                 } else {
                     $salt = uniqid(mt_rand(), true);
                     $user->setSalt($salt);

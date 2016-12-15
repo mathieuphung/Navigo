@@ -27,6 +27,8 @@ class Users implements UserInterface
      * @ORM\Column(name="password", type="string", length=255, nullable=true)
      */
     private $password;
+    
+    private $passwordCheck;
 
     /**
      * @var string
@@ -146,6 +148,18 @@ class Users implements UserInterface
     public function getPassword()
     {
         return $this->password;
+    }
+    
+    public function setPasswordCheck($password)
+    {
+        $this->passwordCheck = $password;
+        
+        return $this;
+    }
+    
+    public function getPasswordCheck()
+    {
+        return $this->passwordCheck;
     }
 
     /**

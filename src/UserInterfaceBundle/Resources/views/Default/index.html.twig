@@ -6,7 +6,7 @@
     {% if user is defined %}
     <div class="container">
         <div id="navigo_template">
-            {% if user.photo is defined %}<img src="../uploads/photos/{{ user.photo }}" alt="{{ user.username }}"> {% endif %}
+            {% if user.photo is not null %}<img src="../uploads/photos/{{ user.photo }}" alt="{{ user.username }}"> {% endif %}
             <span id="name">{{ user.name }}</span>
             <span id="card_number">{{ user.card.number }}</span>
         </div>

@@ -18,12 +18,12 @@
 }
 
 #navigo_template > #name {
-    position: relative;
     width: 148px;
     display: inline-block;
+    position: absolute;
+    right: 579px;
+    top: 323px;
     text-align: center;
-    right: -154px;
-    bottom: -145px;
 }
 
 #navigo_template > #card_number {

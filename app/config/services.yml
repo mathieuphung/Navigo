@@ -4,6 +4,8 @@ parameters:
 #    parameter_name: value
 
 services:
+    userinterface.password_encoder:
+        class: UserInterfaceBundle\Security\Core\Encoder\PasswordEncoder
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]

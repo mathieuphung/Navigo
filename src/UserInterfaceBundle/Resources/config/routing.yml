@@ -3,15 +3,19 @@ user_interface_homepage:
     defaults: { _controller: UserInterfaceBundle:Default:index}
 
 signup:
-    path:     /user/signup
+    path:     /inscription
     defaults: { _controller: UserInterfaceBundle:Signup:signup }
 
 signin:
-    path:     /user/signin
+    path:     /connection
     defaults: { _controller: UserInterfaceBundle:Signin:Signin }
 
 login_check:
-    pattern:   /login_check
+    pattern:   /user/login_check
 
 logout:
-    pattern:   /logout
+    pattern:   /user/logout
+
+payment:
+    path:     /user/renouvellement-abonnement
+    defaults: { _controller: UserInterfaceBundle:Payment:Payment }

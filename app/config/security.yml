@@ -10,6 +10,7 @@ security:
             algorithm:   sha1
             iterations: 1
             encode_as_base64: false
+            id: userinterface.password_encoder
         #Symfony\Component\Security\Core\User\User:
             #algorithm:   sha1
             #iterations:  1
@@ -28,14 +29,13 @@ security:
             security: false
 
         main:
-            pattern:   ^/
-            anonymous: true
+            pattern:   ^/user
             provider:  main
             form_login:
                 login_path: signin
-                check_path: login_check
+                check_path: /user/login_check
             logout:
-                path:   logout
+                path:   /user/logout
                 target: /
             # activate different ways to authenticate
 
@@ -44,5 +44,7 @@ security:
 
             # form_login: ~
             # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
+        default:
+            anonymous: ~
     role_hierarchy:
-        ROLE_ADMIN:       ROLE_USER
+        ROLE_ADMIN:       [ROLE_USER, ROLE_TRAVELER]
