@@ -19,3 +19,11 @@ logout:
 payment:
     path:     /user/renouvellement-abonnement
     defaults: { _controller: UserInterfaceBundle:Payment:Payment }
+
+payment_check:
+    path:     /user/renouvellement-abonnement-soumission
+    defaults: { _controller: UserInterfaceBundle:Payment:PaymentCheck }
+
+card_check:
+    path:     /user/verification-carte
+    defaults: { _controller: UserInterfaceBundle:CardCheck:CardCheck }
