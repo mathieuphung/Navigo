@@ -29,13 +29,14 @@ security:
             security: false
 
         main:
-            pattern:   ^/user
+            pattern:   ^/
+            anonymous: true
             provider:  main
             form_login:
                 login_path: signin
-                check_path: /user/login_check
+                check_path: /login_check
             logout:
-                path:   /user/logout
+                path:   /logout
                 target: /
             # activate different ways to authenticate
 
@@ -46,5 +47,18 @@ security:
             # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
         default:
             anonymous: ~
+
     role_hierarchy:
         ROLE_ADMIN:       [ROLE_USER, ROLE_TRAVELER]
+        ROLE_TRAVELER:       [ROLE_USER]
+
+    access_control:
+            # URL of FOSUserBundle which need to be available to anonymous users
+            - { path: ^/connection, role: IS_AUTHENTICATED_ANONYMOUSLY }
+            - { path: ^/inscription, role: IS_AUTHENTICATED_ANONYMOUSLY }
+            - { path: ^/verification-carte, role: IS_AUTHENTICATED_ANONYMOUSLY }
+
+            # Secured part of the site
+            # This config requires being logged for the whole site and having the admin role for the admin part.
+            # Change these rules to adapt them to your needs
+            - { path: ^/user, role: [ROLE_TRAVELER] }

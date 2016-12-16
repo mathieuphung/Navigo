@@ -1,3 +1,12 @@
-<div class="container">
-    <h1>Validité de ma carte</h1>
-</div>
+{% extends "UserInterfaceBundle:Default:navbar.html.twig" %}
+
+{% block body %}
+    <div class="container">
+        {% if bill is defined %}
+            <h1>{{ bill.date|date("d/m/Y") }}</h1>
+            <p>Carte: {{ bill.users.card.number }}</p>
+            <p>Valide jusqu'au: {{ bill.users.card.validuntill|date("d/m/Y") }}</p>
+            <p>Prix total: {{ bill.total|replace({'.': ','}) }}€</p>
+        {% endif %}
+    </div>
+{% endblock %}

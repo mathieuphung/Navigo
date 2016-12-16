@@ -18,18 +18,10 @@ class BillController extends Controller
     public function GenerateAction($bill)
     {
         $bill = $this->getDoctrine()->getRepository('UserInterfaceBundle:Bills')->findOneById($bill);
-        $html = $this->renderView('UserInterfaceBundle:Bill:Generate.html.twig', array(
-            
-        ));
     
-        return new Response(
-            $this->get('knp_snappy.pdf')->getOutputFromHtml($html),
-            200,
-            array(
-                'Content-Type'          => 'application/pdf',
-                'Content-Disposition'   => 'attachment; filename="file.pdf"'
-            )
-        );
+        return $this->render('UserInterfaceBundle:Bill:Generate.html.twig', array(
+            'bill' => $bill,
+        ));
     }
 
 }

@@ -16,6 +16,7 @@ class CardsType extends AbstractType
     {
         $builder
             ->add('number')
+            ->add('submit', 'submit')
         ;
     }
     

@@ -3,9 +3,9 @@
 {% block body %}
 <div class="container">
     <h1>Validité de ma carte</h1>
-    {% if user is defined %}
+    {% if card is defined %}
         <p>
-            {{ user.card.number }} -> <span {% if expired == true %}style="color: red"{% endif %}>Valable jusqu'au {{ user.card.validuntill|date("d/m/Y") }} {% if expired == true %}, votre abonnement est expiré. Renouvelez-le <a href="{{ path('payment') }}">ici</a>{% endif %}</span>
+            {{ card.number }} -> <span {% if expired == true %}style="color: red"{% endif %}>Valable jusqu'au {{ card.validuntill|date("d/m/Y") }} {% if expired == true %}, votre abonnement est expiré. Renouvelez-le <a href="{{ path('payment') }}">ici</a>{% endif %}</span>
         </p>
     {% endif %}
 </div>

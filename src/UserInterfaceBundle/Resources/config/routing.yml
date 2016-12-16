@@ -11,10 +11,10 @@ signin:
     defaults: { _controller: UserInterfaceBundle:Signin:Signin }
 
 login_check:
-    pattern:   /user/login_check
+    pattern:   /login_check
 
 logout:
-    pattern:   /user/logout
+    pattern:   /logout
 
 payment:
     path:     /user/renouvellement-abonnement
@@ -25,7 +25,7 @@ payment_check:
     defaults: { _controller: UserInterfaceBundle:Payment:PaymentCheck }
 
 card_check:
-    path:     /user/verification-carte
+    path:     /verification-carte
     defaults: { _controller: UserInterfaceBundle:CardCheck:CardCheck }
 
 bills:
