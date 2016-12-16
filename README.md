@@ -12,7 +12,9 @@ What's inside?
 
 The Symfony Standard Edition is configured with the following defaults:
 
-  * An AppBundle you can use to start coding;
+  * An UserInterfaceBundle as the user interface;
+  
+  * A BackBundle as the backoffice;
 
   * Twig as the only configured template engine;
 
