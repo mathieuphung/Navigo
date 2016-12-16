@@ -1,0 +1,7 @@
+back_homepage:
+    path:     /
+    defaults: { _controller: BackBundle:Default:index }
+
+add_time_homepage:
+   path:     /prolonger/{userId}
+   defaults: { _controller: BackBundle:Default:addTime }

@@ -1,0 +1,46 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+    <div class="container">
+        <h2>Recherche </h2>
+        {{ form_start(searchForm, {'attr': {'id': 'searchForm', }}) }}
+        <div class="input-group">
+            {{ form_widget(searchForm.searchField, { 'attr': {'class': 'form-control'} }) }}
+            <span class="input-group-btn">
+                  <button type="submit" class="btn btn-primary">Rechercher</button>
+               </span>
+        </div>
+        {{ form_end(searchForm) }}
+        {% if message is defined %}<p>{{ message|raw }}</p>{% endif %}
+        <div class="results">
+            {% if results is defined %}
+                <table class="table table-condensed">
+                    <thead>
+                        <th>Id</th>
+                        <th>Nom</th>
+                        <th>Email</th>
+                        <th>Numéro de carte</th>
+                        <th>Validité</th>
+                        <th>Prolonger</th>
+                    </thead>
+                    {% for result in results %}
+                        <tr>
+                            <td>{{ result.id }}</td>
+                            <td>{{ result.name }}</td>
+                            <td>{{ result.email }}</td>
+                            <td>{{ result.card.number }}</td>
+                            <td>{{ result.card.validuntill|date("d/m/Y") }}</td>
+                            <td>
+                                <form action="{{ path('add_time_homepage', {'userId': result.id}) }}" method="POST" id="payment-form">
+                                    <input type="text" name="time" placeholder="AAAA-MM-JJ">
+                                    <input type="submit" class="submit" value="Prolonger">
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tboby>
+                </table>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
