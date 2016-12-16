@@ -20,6 +20,7 @@
                     {% if is_granted('ROLE_TRAVELER') == false %}<li id="login"><a href="{{ path('signin') }}">Me connecter</a></li>{% endif %}
                     <li id="check_card"><a href="{{ path('card_check') }}">Vérifier ma carte</a></li>
                     <li id="payment"><a href="{{ path('payment') }}">Prolonger mon abonnement</a></li>
+                    <li id="payment"><a href="{{ path('bills') }}">Mes factures</a></li>
                     {% if is_granted('ROLE_TRAVELER') %}<li id="logout"><a href="{{ path('logout') }}">Me déconnecter</a></li>{% endif %}
                 </ul>
             </div><!-- /.navbar-collapse -->

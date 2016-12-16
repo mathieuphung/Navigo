@@ -1,0 +1,12 @@
+{% extends "UserInterfaceBundle:Default:navbar.html.twig" %}
+
+{% block body %}
+    <div class="container">
+        <h1>Mes factures</h1>
+        {% if bills is not null %}
+            {% for bill in bills %}
+                <a href="{{ path('generate_pdf', {'bill': bill.id}) }}">{{ bill.date|date("d/m/Y") }}</a><br>
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endblock %}

@@ -27,3 +27,11 @@ payment_check:
 card_check:
     path:     /user/verification-carte
     defaults: { _controller: UserInterfaceBundle:CardCheck:CardCheck }
+
+bills:
+    path:     /user/factures
+    defaults: { _controller: UserInterfaceBundle:Bill:Bills }
+
+generate_pdf:
+    path:     /user/generation-facture/{bill}
+    defaults: { _controller: UserInterfaceBundle:Bill:Generate }

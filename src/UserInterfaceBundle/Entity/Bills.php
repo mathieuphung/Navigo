@@ -15,7 +15,7 @@ class Bills
     /**
      * @var integer
      *
-     * @ORM\Column(name="total", type="integer", nullable=false)
+     * @ORM\Column(name="total", type="float", nullable=false)
      */
     private $total;
 
@@ -47,10 +47,15 @@ class Bills
 
 
 
+    public function __construct()
+    {
+        $this->date = new \DateTime();
+    }
+    
     /**
      * Set total
      *
-     * @param integer $total
+     * @param float $total
      * @return Bills
      */
     public function setTotal($total)
@@ -63,7 +68,7 @@ class Bills
     /**
      * Get total
      *
-     * @return integer 
+     * @return float
      */
     public function getTotal()
     {
