@@ -4,7 +4,7 @@ namespace UserInterfaceBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use UserInterfaceBundle\Entity\Cards;
-use UserInterfaceBundle\Form\CardsType;
+use UserInterfaceBundle\Form\CardCheckType;
 use Symfony\Component\HttpFoundation\Request;
 
 class CardCheckController extends Controller
@@ -29,7 +29,7 @@ class CardCheckController extends Controller
             ));
         } else {
             $cards = new Cards();
-            $form = $this->createForm(new CardsType(), $cards, array("action" => $this->generateUrl('card_check')));
+            $form = $this->createForm(new CardCheckType(), $cards, array("action" => $this->generateUrl('card_check')));
             if ($form->handleRequest($request)->isValid()) {
                 $formData = $form->getData();
                 $card_exist = $this->getDoctrine()->getRepository('UserInterfaceBundle:Cards')->findOneByNumber($formData->getNumber());

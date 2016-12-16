@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class CardsType extends AbstractType
+class CardCheckType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -16,6 +16,7 @@ class CardsType extends AbstractType
     {
         $builder
             ->add('number')
+            ->add('submit', 'submit')
         ;
     }
     
@@ -28,7 +29,7 @@ class CardsType extends AbstractType
             'data_class' => 'UserInterfaceBundle\Entity\Cards'
         ));
     }
-
+    
     /**
      * @return string
      */

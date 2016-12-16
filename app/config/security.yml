@@ -60,3 +60,4 @@ security:
 
             # Secured part of the site
             - { path: ^/user, role: [ROLE_TRAVELER] }
+            - { path: ^/back, role: [ROLE_ADMIN] }

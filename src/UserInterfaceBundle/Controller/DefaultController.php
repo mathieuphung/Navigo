@@ -13,7 +13,6 @@ class DefaultController extends Controller
             return $this->render('UserInterfaceBundle:Default:index.html.twig');
         } else {
             return $this->render('UserInterfaceBundle:Default:index.html.twig', array(
-                'name' => explode(' ',$user->getName())[1],
                 'user' => $user,
             ));
         }
